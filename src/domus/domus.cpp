@@ -41,7 +41,7 @@ void show_help_text(po::options_description options) {
 };
 
 int main(int argc, char* argv[]) {
-    po::options_description general_options("General options");
+	po::options_description general_options("General options");
     po::positional_options_description positional_options;
 
     general_options.add_options()
