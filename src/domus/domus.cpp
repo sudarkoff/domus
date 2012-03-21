@@ -29,8 +29,10 @@ SOFTWARE.
 #include <iostream>
 #include <string>
 
-extern const char * gitVersion();
-extern std::string sysInfo();
+namespace domus {
+    extern const char * gitVersion();
+    extern std::string sysInfo();
+}
 
 #include <boost/program_options.hpp>
 
@@ -41,7 +43,7 @@ void show_help_text(po::options_description options) {
 };
 
 int main(int argc, char* argv[]) {
-	po::options_description general_options("General options");
+    po::options_description general_options("General options");
     po::positional_options_description positional_options;
 
     general_options.add_options()
@@ -63,7 +65,7 @@ int main(int argc, char* argv[]) {
             return 0;
         }
         if (params.count("version")) {
-            std::cout << domus::Version() << " "
+            std::cout << domus::Version() << "-"
                       << domus::gitVersion() << std::endl;
             return 0;
         }
