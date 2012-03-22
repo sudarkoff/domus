@@ -1,0 +1,49 @@
+# -*- mode: python; -*-
+
+# This SConscript describes build rules for the "domus" project.
+
+import os
+from buildscripts import utils
+
+Import("env")
+Import("has_option")
+Import("getSysInfo")
+Import("darwin linux nix")
+
+def setupBuildInfoFile( env, target, source, **kw ):
+    version = utils.getGitVersion()
+    sysInfo = getSysInfo()
+    contents = '\n'.join([
+        '#include <iostream>',
+        '#include <string>',
+        '#include <boost/version.hpp>',
+        'namespace domus { const char * gitVersion(){ return "' + version + '"; } }',
+        'namespace domus { std::string sysInfo(){ return "' + sysInfo + ' BOOST_LIB_VERSION=" BOOST_LIB_VERSION; } }',
+        ])
+
+    contents += '\n\n';
+
+    out = open( str( target[0] ) , 'wb' )
+    try:
+        out.write( contents )
+    finally:
+        out.close()
+
+env.AlwaysBuild( env.Command( 'buildinfo.cpp', [], setupBuildInfoFile ) )
+
+# --- SOURCE FILES ---
+serverOnlyFiles = [ "buildinfo.cpp",
+                    "domus.cpp"
+                  ]
+
+serverOnlyFiles += env['DOMUS_COMMON_FILES']
+
+
+# --- TARGETS ---
+
+# main target
+domusd = env.Install( '#/', env.Program( "domusd", serverOnlyFiles,
+                                         LIBDEPS=[],
+                                         _LIBDEPS='$_LIBDEPS_OBJS' ) )
+
+Default( domusd )
