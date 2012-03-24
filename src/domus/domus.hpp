@@ -1,6 +1,4 @@
-// @file domus.hpp
-
-/**
+/** @file domus.hpp
 
 Copyright (c) 2012 George Sudarkoff
 

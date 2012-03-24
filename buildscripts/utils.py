@@ -7,20 +7,19 @@ import os.path
 import itertools
 import subprocess
 import sys
-# various utilities that are handy
 
 def getAllSourceFiles( arr=None , prefix="." ):
     if arr is None:
         arr = []
 
     for x in os.listdir( prefix ):
-        if x.startswith( "." ) or x.startswith( "pcre-" ) or x.startswith( "32bit" ) or x.startswith( "mongodb-" ) or x.startswith("debian") or x.startswith( "mongo-cxx-driver" ):
+        if x.startswith( "." ) or x.startswith("build") or x.startswith( "buildscripts" ):
             continue
         full = prefix + "/" + x
         if os.path.isdir( full ) and not os.path.islink( full ):
             getAllSourceFiles( arr , full )
         else:
-            if full.endswith( ".cpp" ) or full.endswith( ".hpp" ) or full.endswith( ".h" ) or full.endswith( ".c" ):
+            if full.endswith( ".hpp" ) or full.endswith( ".cpp" ) or full.endswith( ".h" ) or full.endswith( ".c" ):
                 arr.append( full )
 
     return arr

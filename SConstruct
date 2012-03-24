@@ -95,9 +95,6 @@ add_option( "libpath", "Library path if you have libraries in a nonstandard dire
 # dev options
 add_option( "d", "debug build no optimization, etc..." , 0 , True , "debugBuild" )
 
-add_option( "use-system-boost", "use system version of boost libraries", 0, True )
-add_option( "use-system-all" , "use all system libraries", 0 , True )
-
 # don't run configure if user calls --help
 if GetOption('help'):
     Return()
@@ -325,17 +322,17 @@ def do_configure( myenv , shell=False ):
 
         return False
 
-    if has_option('use-system-all') or has_option('use-system-boost'):
-        if not conf.CheckCXXHeader( "boost/filesystem/operations.hpp" ):
-            print( "can't find boost headers" )
-            Exit(1)
+    # check boost lib
+    if not conf.CheckCXXHeader( "boost/filesystem/operations.hpp" ):
+        print( "can't find boost headers" )
+        Exit(1)
 
-        # this will add it if it exists and works
-        my_check_lib( [ "boost_system-mt", "boost_system" ] )
+    # this will add it if it exists and works
+    my_check_lib( [ "boost_system-mt", "boost_system" ] )
 
-        for b in boostLibs:
-            l = "boost_" + b
-            my_check_lib( [ l + "-mt" , l ] , release or not shell)
+    for b in boostLibs:
+        l = "boost_" + b
+        my_check_lib( [ l + "-mt" , l ] , release or not shell)
 
     if not conf.CheckCXXHeader( "execinfo.h" ):
         myenv.Append( CPPDEFINES=[ "NOEXECINFO" ] )

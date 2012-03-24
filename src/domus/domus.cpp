@@ -1,6 +1,5 @@
-// @file domus.cpp : Defines main() for the domusd program.
-
-/**
+/** @file domus.cpp
+ @brief Defines main() for the domusd program.
 
 Copyright (c) 2012 George Sudarkoff
 
