@@ -13,7 +13,7 @@ def getAllSourceFiles( arr=None , prefix="." ):
         arr = []
 
     for x in os.listdir( prefix ):
-        if x.startswith( "." ) or x.startswith("build") or x.startswith( "buildscripts" ):
+        if x.startswith( "." ) or x.startswith("build") or x.startswith( "buildscripts" ) or x.startswith( "third_party" ):
             continue
         full = prefix + "/" + x
         if os.path.isdir( full ) and not os.path.islink( full ):
