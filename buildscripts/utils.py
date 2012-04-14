@@ -38,7 +38,7 @@ def getGitBranch():
 
 def getGitBranchString( prefix="" , postfix="" ):
     t = re.compile( '[/\\\]' ).split( os.getcwd() )
-    if len(t) > 2 and t[len(t)-1] == "mongo":
+    if len(t) > 2 and t[len(t)-1] == "domus":
         par = t[len(t)-2]
         m = re.compile( ".*_([vV]\d+\.\d+)$" ).match( par )
         if m is not None:
