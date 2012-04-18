@@ -33,7 +33,7 @@ env.AlwaysBuild( env.Command( 'buildinfo.cpp', [], setupBuildInfoFile ) )
 
 # --- SOURCE FILES ---
 serverOnlyFiles = [ "buildinfo.cpp",
-                    "domus.cpp"
+                    "domus.cpp",
                   ]
 
 serverOnlyFiles += env['DOMUS_COMMON_FILES']
