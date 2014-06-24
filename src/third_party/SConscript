@@ -1,5 +1,0 @@
-# -*- mode: python; -*-
-#
-# This is the third-party SConscript file.
-
-SConscript( [ 'gtest-1.6.0/SConscript', ] )

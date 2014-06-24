@@ -1,5 +1,0 @@
-build/
-*.pyc
-*.log
-.sconf_temp/
-.sconsign.dblite
