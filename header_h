@@ -1,10 +1,10 @@
 // -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
 
 /**
- * @file <filename.hpp>
- * @brief <File description>
+ * @file $MODULE.hpp
+ * @brief $DESCRIPTION
  *
- * Copyright (c) 2012 George Sudarkoff
+ * Copyright (c) $YEAR George Sudarkoff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a 
  * copy of this software and associated documentation files (the "Software"), 
@@ -27,8 +27,8 @@
  */
 
 #pragma once
-#ifndef DOMUS_<FILENAME>_HPP
-#define DOMUS_<FILENAME>_HPP
+#ifndef DOMUS_$MODULE_HPP
+#define DOMUS_$MODULE_HPP
 
 namespace domus {
 
@@ -36,4 +36,5 @@ namespace domus {
 
 } // namespace domus
 
-#endif // DOMUS_<FILENAME>_HPP
+#endif // DOMUS_$MODULE_HPP
+
