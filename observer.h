@@ -1,5 +1,3 @@
-// -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
-
 /**
  * @file observer.hpp
  * @brief Implementation of the Observer design pattern.
@@ -30,41 +28,56 @@
 #ifndef DOMUS_OBSERVER_H
 #define DOMUS_OBSERVER_H
 
+#include "storage_policy.h"
+
 #include <functional>
-#include <utility>
-#include <map>
-#include <vector>
 
 namespace domus {
 
-  template <typename Event>
+  template <
+    typename Event
+   ,typename Message = Event
+   ,typename Observer = std::function<void(Message const&)>
+   ,typename StoragePolicy = StdStoragePolicy<Event, Observer>
+  >
   class Subject {
     public:
-      Subject();
+      Subject() : observers_() {}
+
       Subject(Subject const&) = default;
       Subject(Subject&&) = default;
 
-      Subject& operator=(Subject const*) & = default;
-      Subject& operator=(Subject&&) & = default;
+      Subject& operator=(Subject const&) = default;
+      Subject& operator=(Subject&&) = default;
 
-      virtual ~Subject() {}
+      virtual ~Subject() { }
 
-      template <typename Observer>
       void Attach(Event const& event, Observer&& observer)
       {
-        observers_[event].push_back(std::forward<Observer>(observer));
+        observers_.Insert(event, std::forward<Observer>(observer));
+      }
+
+      void Detach(Event const& event, Observer& observer)
+      {
+        observers_.Erase(event, observer);
       }
 
       void Notify(Event const& event)
       {
-        for (auto const& observer : observers_[event])
-        {
-          observer();
+        for (auto const& observer : observers_.at(event)) {
+          observer(event);
+        }
+      }
+
+      void Notify(Event const& event, Message const& message)
+      {
+        for (auto const& observer : observers_.at(event)) {
+          observer(message);
         }
       }
 
     private:
-      std::map<Event, std::vector<std::function<void()>>> observers_;
+      StoragePolicy observers_;
   };
 
 } // namespace domus
