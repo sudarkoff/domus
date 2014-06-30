@@ -1,9 +1,10 @@
-// -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
-
 /**
- * @file $MODULE.hpp
- * @brief $DESCRIPTION
+ * @file $module.h
+ * @brief $description
  *
+ */
+
+/*
  * Copyright (c) $YEAR George Sudarkoff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a 
@@ -27,8 +28,8 @@
  */
 
 #pragma once
-#ifndef DOMUS_$MODULE_HPP
-#define DOMUS_$MODULE_HPP
+#ifndef DOMUS_$MODULE_H
+#define DOMUS_$MODULE_H
 
 namespace domus {
 
@@ -36,5 +37,5 @@ namespace domus {
 
 } // namespace domus
 
-#endif // DOMUS_$MODULE_HPP
+#endif // DOMUS_$MODULE_H
 

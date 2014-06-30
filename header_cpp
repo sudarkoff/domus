@@ -1,9 +1,10 @@
-// -*- mode:C++; tab-width:4; c-basic-offset:4; indent-tabs-mode:nil -*-
-
 /**
- * @file $MODULE.cpp
- * @brief $DESCRIPTION
+ * @file $module.cpp
+ * @brief $description
  *
+ */
+
+/*
  * Copyright (c) $YEAR George Sudarkoff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a 
@@ -26,7 +27,8 @@
  *
  */
 
-#include "<$MODULE.hpp>"
+#include "$module.h"
+
 // The remaining headers go here
 
 namespace domus {
