@@ -1,7 +1,9 @@
 /**
  * @file storage_policy.h
- * @brief Various implementations of the StoragePolicy for the Observer pattern.
- *
+ * @brief StoragePolicy for the Observer pattern.
+ */
+
+/*
  * Copyright (c) 2014 George Sudarkoff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -28,6 +30,8 @@
 #ifndef DOMUS_STORAGE_POLICY_H
 #define DOMUS_STORAGE_POLICY_H
 
+#include "threading.h"
+
 #include <functional>
 #include <utility>
 #include <map>
@@ -40,9 +44,10 @@ namespace domus {
    */
   template <
     typename Event,
-    typename Observer
+    typename Observer,
+    typename ThreadingModel = ObjectLevelLockable
   >
-  class StdStoragePolicy {
+  class StdStoragePolicy : private ThreadingModel {
     public:
       StdStoragePolicy() : store_() {}
 
@@ -55,14 +60,17 @@ namespace domus {
       virtual ~StdStoragePolicy() { }
 
       void Insert(Event&& event, Observer&& value) {
+        typename ThreadingModel::Lock guard(*this);
         store_[std::move(event)].push_back(std::forward<Observer>(value));
       }
 
       void Insert(Event const& event, Observer&& value) {
+        typename ThreadingModel::Lock guard(*this);
         store_[event].push_back(std::forward<Observer>(value));
       }
 
       void Erase(Event const& event, Observer const& value) {
+        typename ThreadingModel::Lock guard(*this);
         auto v = store_[event];
         auto pos = v.find(std::begin(v), std::end(v), value);
         if (pos != std::end(v)) {

@@ -1,7 +1,9 @@
 /**
  * @file observer.hpp
  * @brief Implementation of the Observer design pattern.
- *
+ */
+
+/*
  * Copyright (c) 2014 George Sudarkoff
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -34,11 +36,12 @@
 
 namespace domus {
 
-  template <
-    typename Event
-   ,typename Message = Event
-   ,typename Observer = std::function<void(Message const&)>
-   ,typename StoragePolicy = StdStoragePolicy<Event, Observer>
+  template
+  <
+    typename Event,
+    typename Message = Event,
+    typename Observer = std::function<void(Message const&)>,
+    typename StoragePolicy = StdStoragePolicy<Event, Observer>
   >
   class Subject {
     public:
