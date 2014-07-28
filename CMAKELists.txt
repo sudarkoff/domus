@@ -2,7 +2,9 @@ cmake_minimum_required (VERSION 2.8.9)
 
 set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
 
+set(PROJDIR "src")
+
 project (domus)
 
-add_executable(domus domus.cpp)
+add_executable(domus ${PROJDIR}/domus.cpp)
 
